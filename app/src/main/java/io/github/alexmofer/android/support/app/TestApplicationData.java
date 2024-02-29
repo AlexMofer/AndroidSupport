@@ -7,9 +7,9 @@ import android.widget.Toast;
  * 测试数据
  * Created by Alex on 2024/2/28.
  */
-public class TestApplicationData extends ApplicationData {
+class TestApplicationData extends ApplicationData {
 
-    private final String mTest = "测试文案";
+    private final String mTest = "匿名类";
 
     private TestApplicationData() {
         //no instance

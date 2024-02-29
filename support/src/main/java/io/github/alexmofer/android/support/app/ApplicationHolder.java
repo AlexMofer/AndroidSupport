@@ -128,6 +128,7 @@ public class ApplicationHolder {
     /**
      * 获取应用级数据
      *
+     * @param clazz   类
      * @param creator 构建者
      * @param <T>     类型
      * @return 应用级数据对象
@@ -135,23 +136,27 @@ public class ApplicationHolder {
     @NonNull
     public static <T extends ApplicationData> T getApplicationData(Class<T> clazz,
                                                                    @NonNull ApplicationDataCreator<T> creator) {
-        final ApplicationHolder holder = getInstance();
-        final String key = clazz.getName();
-        final ApplicationData saved = holder.mApplicationDataMap.get(key);
-        if (saved != null) {
-            //noinspection unchecked
-            return (T) saved;
+        synchronized (ApplicationHolder.class) {
+            final ApplicationHolder holder = getInstance();
+            final String key = clazz.getName();
+            final ApplicationData saved = holder.mApplicationDataMap.get(key);
+            if (saved != null) {
+                //noinspection unchecked
+                return (T) saved;
+            }
+            final T created = creator.create();
+            holder.mApplicationDataMap.put(key, created);
+            return created;
         }
-        final T created = creator.create();
-        holder.mApplicationDataMap.put(key, created);
-        return created;
     }
 
     static void removeApplicationData(ApplicationData data) {
-        final ApplicationData removed =
-                getInstance().mApplicationDataMap.remove(data.getClass().getName());
-        if (removed != null) {
-            removed.onDestroy();
+        synchronized (ApplicationHolder.class) {
+            final ApplicationData removed =
+                    getInstance().mApplicationDataMap.remove(data.getClass().getName());
+            if (removed != null) {
+                removed.onDestroy();
+            }
         }
     }
 
@@ -165,9 +170,11 @@ public class ApplicationHolder {
 
         @Override
         public void onConfigurationChanged(@NonNull Configuration newConfig) {
-            final int count = mHolder.mApplicationDataMap.size();
-            for (int i = 0; i < count; i++) {
-                mHolder.mApplicationDataMap.valueAt(i).onConfigurationChanged(newConfig);
+            synchronized (ApplicationHolder.class) {
+                final int count = mHolder.mApplicationDataMap.size();
+                for (int i = 0; i < count; i++) {
+                    mHolder.mApplicationDataMap.valueAt(i).onConfigurationChanged(newConfig);
+                }
             }
         }
 
@@ -178,13 +185,15 @@ public class ApplicationHolder {
 
         @Override
         public void onTrimMemory(int level) {
-            final int count = mHolder.mApplicationDataMap.size();
-            for (int i = count - 1; i >= 0; i--) {
-                final ApplicationData saved = mHolder.mApplicationDataMap.valueAt(i);
-                if (level >= saved.getAutoDestroyLevel()) {
-                    mHolder.mApplicationDataMap.removeAt(i).onDestroy();
-                } else {
-                    saved.onTrimMemory(level);
+            synchronized (ApplicationHolder.class) {
+                final int count = mHolder.mApplicationDataMap.size();
+                for (int i = count - 1; i >= 0; i--) {
+                    final ApplicationData saved = mHolder.mApplicationDataMap.valueAt(i);
+                    if (level >= saved.getAutoDestroyLevel()) {
+                        mHolder.mApplicationDataMap.removeAt(i).onDestroy();
+                    } else {
+                        saved.onTrimMemory(level);
+                    }
                 }
             }
         }
