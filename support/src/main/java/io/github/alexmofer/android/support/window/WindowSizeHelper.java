@@ -79,7 +79,7 @@ public class WindowSizeHelper {
      * @return 不低于限定值时返回true
      */
     public static boolean isW320() {
-        return getBoolean(R.bool.am_ac_ws_w320);
+        return getBoolean(R.bool.w320);
     }
 
     /**
@@ -88,7 +88,7 @@ public class WindowSizeHelper {
      * @return 不低于限定值时返回true
      */
     public static boolean isW480() {
-        return getBoolean(R.bool.am_ac_ws_w480);
+        return getBoolean(R.bool.w480);
     }
 
     /**
@@ -97,7 +97,7 @@ public class WindowSizeHelper {
      * @return 不低于限定值时返回true
      */
     public static boolean isW600() {
-        return getBoolean(R.bool.am_ac_ws_w600);
+        return getBoolean(R.bool.w600);
     }
 
     /**
@@ -106,7 +106,7 @@ public class WindowSizeHelper {
      * @return 不低于限定值时返回true
      */
     public static boolean isW720() {
-        return getBoolean(R.bool.am_ac_ws_w720);
+        return getBoolean(R.bool.w720);
     }
 
     /**
@@ -115,7 +115,7 @@ public class WindowSizeHelper {
      * @return 不低于限定值时返回true
      */
     public static boolean isW840() {
-        return getBoolean(R.bool.am_ac_ws_w840);
+        return getBoolean(R.bool.w840);
     }
 
     /**
@@ -124,7 +124,7 @@ public class WindowSizeHelper {
      * @return 不低于限定值时返回true
      */
     public static boolean isW900() {
-        return getBoolean(R.bool.am_ac_ws_w900);
+        return getBoolean(R.bool.w900);
     }
 
     /**
@@ -160,7 +160,7 @@ public class WindowSizeHelper {
      * @return 不低于限定值时返回true
      */
     public static boolean isH320() {
-        return getBoolean(R.bool.am_ac_ws_h320);
+        return getBoolean(R.bool.h320);
     }
 
     /**
@@ -169,7 +169,7 @@ public class WindowSizeHelper {
      * @return 不低于限定值时返回true
      */
     public static boolean isH480() {
-        return getBoolean(R.bool.am_ac_ws_h480);
+        return getBoolean(R.bool.h480);
     }
 
     /**
@@ -178,7 +178,7 @@ public class WindowSizeHelper {
      * @return 不低于限定值时返回true
      */
     public static boolean isH600() {
-        return getBoolean(R.bool.am_ac_ws_h600);
+        return getBoolean(R.bool.h600);
     }
 
     /**
@@ -187,7 +187,7 @@ public class WindowSizeHelper {
      * @return 不低于限定值时返回true
      */
     public static boolean isH720() {
-        return getBoolean(R.bool.am_ac_ws_h720);
+        return getBoolean(R.bool.h720);
     }
 
     /**
@@ -196,7 +196,7 @@ public class WindowSizeHelper {
      * @return 不低于限定值时返回true
      */
     public static boolean isH840() {
-        return getBoolean(R.bool.am_ac_ws_h840);
+        return getBoolean(R.bool.h840);
     }
 
     /**
@@ -205,7 +205,7 @@ public class WindowSizeHelper {
      * @return 不低于限定值时返回true
      */
     public static boolean isH900() {
-        return getBoolean(R.bool.am_ac_ws_h900);
+        return getBoolean(R.bool.h900);
     }
 
     /**
@@ -242,7 +242,7 @@ public class WindowSizeHelper {
      * @return 不低于限定值时返回true
      */
     public static boolean isSW320() {
-        return getBoolean(R.bool.am_ac_ws_sw320);
+        return getBoolean(R.bool.sw320);
     }
 
     /**
@@ -252,7 +252,7 @@ public class WindowSizeHelper {
      * @return 不低于限定值时返回true
      */
     public static boolean isSW480() {
-        return getBoolean(R.bool.am_ac_ws_sw480);
+        return getBoolean(R.bool.sw480);
     }
 
     /**
@@ -262,7 +262,7 @@ public class WindowSizeHelper {
      * @return 不低于限定值时返回true
      */
     public static boolean isSW600() {
-        return getBoolean(R.bool.am_ac_ws_sw600);
+        return getBoolean(R.bool.sw600);
     }
 
     /**
@@ -272,7 +272,7 @@ public class WindowSizeHelper {
      * @return 不低于限定值时返回true
      */
     public static boolean isSW720() {
-        return getBoolean(R.bool.am_ac_ws_sw720);
+        return getBoolean(R.bool.sw720);
     }
 
     /**
