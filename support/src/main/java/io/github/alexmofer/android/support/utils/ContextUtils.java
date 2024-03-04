@@ -19,6 +19,7 @@ import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.ContextWrapper;
+import android.content.res.Configuration;
 import android.os.Build;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
@@ -37,6 +38,18 @@ public class ContextUtils {
 
     private ContextUtils() {
         //no instance
+    }
+
+    /**
+     * 判断是否为深色模式
+     *
+     * @param context Context
+     * @return 为深色模式时返回true
+     * @noinspection BooleanMethodIsAlwaysInverted
+     */
+    public static boolean isNight(Context context) {
+        return (context.getResources().getConfiguration().uiMode &
+                Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES;
     }
 
     /**
