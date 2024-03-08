@@ -6,8 +6,8 @@ import android.view.Window;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
+
+import io.github.alexmofer.android.support.utils.FragmentUtils;
 
 /**
  * 功能拓展的AppCompatDialogFragment
@@ -49,17 +49,7 @@ public class AppCompatDialogFragment extends androidx.appcompat.app.AppCompatDia
      */
     @Nullable
     protected <T> T getCallback(@NonNull Class<T> clazz) {
-        final FragmentActivity activity = getActivity();
-        if (clazz.isInstance(activity)) {
-            //noinspection unchecked
-            return (T) activity;
-        }
-        final Fragment fragment = getParentFragment();
-        if (clazz.isInstance(fragment)) {
-            //noinspection unchecked
-            return (T) fragment;
-        }
-        return null;
+        return FragmentUtils.getCallback(this, clazz);
     }
 
     /**

@@ -9,7 +9,8 @@ import android.view.View;
 import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.FragmentActivity;
+
+import io.github.alexmofer.android.support.utils.FragmentUtils;
 
 /**
  * 功能拓展的Fragment
@@ -177,16 +178,6 @@ public class Fragment extends androidx.fragment.app.Fragment {
      */
     @Nullable
     protected <T> T getCallback(@NonNull Class<T> clazz) {
-        final FragmentActivity activity = getActivity();
-        if (clazz.isInstance(activity)) {
-            //noinspection unchecked
-            return (T) activity;
-        }
-        final androidx.fragment.app.Fragment fragment = getParentFragment();
-        if (clazz.isInstance(fragment)) {
-            //noinspection unchecked
-            return (T) fragment;
-        }
-        return null;
+        return FragmentUtils.getCallback(this, clazz);
     }
 }
