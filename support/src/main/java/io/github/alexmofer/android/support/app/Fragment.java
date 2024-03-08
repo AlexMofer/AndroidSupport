@@ -9,6 +9,7 @@ import android.view.View;
 import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
 
 /**
  * 功能拓展的Fragment
@@ -167,5 +168,25 @@ public class Fragment extends androidx.fragment.app.Fragment {
             }
         }
         return false;
+    }
+
+    /**
+     * 获取回调
+     *
+     * @return 回调
+     */
+    @Nullable
+    protected <T> T getCallback(@NonNull Class<T> clazz) {
+        final FragmentActivity activity = getActivity();
+        if (clazz.isInstance(activity)) {
+            //noinspection unchecked
+            return (T) activity;
+        }
+        final androidx.fragment.app.Fragment fragment = getParentFragment();
+        if (clazz.isInstance(fragment)) {
+            //noinspection unchecked
+            return (T) fragment;
+        }
+        return null;
     }
 }

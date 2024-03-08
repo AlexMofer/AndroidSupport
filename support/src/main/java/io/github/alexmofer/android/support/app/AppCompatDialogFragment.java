@@ -6,6 +6,8 @@ import android.view.Window;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
 /**
  * 功能拓展的AppCompatDialogFragment
@@ -22,13 +24,13 @@ public class AppCompatDialogFragment extends androidx.appcompat.app.AppCompatDia
 
     @NonNull
     @Override
-    public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
+    public AppCompatDialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         return new Dialog(this);
     }
 
     @Nullable
     @Override
-    public Dialog getDialog() {
+    public AppCompatDialog getDialog() {
         return (Dialog) super.getDialog();
     }
 
@@ -40,7 +42,25 @@ public class AppCompatDialogFragment extends androidx.appcompat.app.AppCompatDia
     protected void onWindowContentViewChanged(@NonNull Window window) {
     }
 
-
+    /**
+     * 获取回调
+     *
+     * @return 回调
+     */
+    @Nullable
+    protected <T> T getCallback(@NonNull Class<T> clazz) {
+        final FragmentActivity activity = getActivity();
+        if (clazz.isInstance(activity)) {
+            //noinspection unchecked
+            return (T) activity;
+        }
+        final Fragment fragment = getParentFragment();
+        if (clazz.isInstance(fragment)) {
+            //noinspection unchecked
+            return (T) fragment;
+        }
+        return null;
+    }
 
     /**
      * 通过ID查找View
@@ -51,7 +71,7 @@ public class AppCompatDialogFragment extends androidx.appcompat.app.AppCompatDia
      */
     @Nullable
     public final <V extends View> V findViewById(int id) {
-        final Dialog dialog = getDialog();
+        final AppCompatDialog dialog = getDialog();
         return dialog == null ? null : dialog.findViewById(id);
     }
 
@@ -64,7 +84,7 @@ public class AppCompatDialogFragment extends androidx.appcompat.app.AppCompatDia
      */
     @NonNull
     public final <V extends View> V requireViewById(int id) {
-        final Dialog dialog = getDialog();
+        final AppCompatDialog dialog = getDialog();
         if (dialog == null) {
             throw new IllegalArgumentException("DialogFragment does not has a Dialog");
         }

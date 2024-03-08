@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(ActivityMainBinding.inflate(getLayoutInflater()).getRoot());
         TestApplicationData.getInstance().toast(this);
         InnerApplicationData.getInstance().toast(this);
+
     }
 
     private static class InnerApplicationData extends ApplicationData {
