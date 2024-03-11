@@ -30,6 +30,14 @@ public class Drawable extends android.graphics.drawable.Drawable {
 
     private ColorFilter mColorFilter;
     private int mAlpha = 255;
+    private int mOpacity = PixelFormat.TRANSLUCENT;
+
+    public Drawable() {
+    }
+
+    public Drawable(int opacity) {
+        mOpacity = opacity;
+    }
 
     @Override
     public void draw(@NonNull Canvas canvas) {
@@ -59,6 +67,15 @@ public class Drawable extends android.graphics.drawable.Drawable {
 
     @Override
     public int getOpacity() {
-        return PixelFormat.TRANSLUCENT;
+        return mOpacity;
+    }
+
+    /**
+     * 设置透明度（API29 开始无意义，29以前的版本有效）
+     *
+     * @param opacity 透明度
+     */
+    protected void setOpacity(int opacity) {
+        mOpacity = opacity;
     }
 }
