@@ -17,14 +17,20 @@ package io.github.alexmofer.android.support.utils;
 
 import android.app.Activity;
 import android.app.ActivityManager;
+import android.content.ContentProvider;
 import android.content.Context;
 import android.content.ContextWrapper;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.ProviderInfo;
 import android.content.res.Configuration;
 import android.os.Build;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 
 import androidx.annotation.Dimension;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.io.File;
@@ -50,6 +56,35 @@ public class ContextUtils {
     public static boolean isNight(Context context) {
         return (context.getResources().getConfiguration().uiMode &
                 Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES;
+    }
+
+    /**
+     * 获取应用内声明的ContentProvider的authority
+     *
+     * @param context Context
+     * @param clazz   ContentProvider
+     * @return authority
+     */
+    public static String getAuthority(@NonNull Context context,
+                                      @NonNull Class<? extends ContentProvider> clazz) {
+        final PackageInfo info;
+        try {
+            info = context.getPackageManager()
+                    .getPackageInfo(context.getPackageName(), PackageManager.GET_PROVIDERS);
+        } catch (Exception e) {
+            return null;
+        }
+        if (info == null || info.providers == null) {
+            return null;
+        }
+        final ProviderInfo[] providers = info.providers;
+        final String name = clazz.getName();
+        for (ProviderInfo provider : providers) {
+            if (TextUtils.equals(provider.name, name)) {
+                return provider.authority;
+            }
+        }
+        return null;
     }
 
     /**
