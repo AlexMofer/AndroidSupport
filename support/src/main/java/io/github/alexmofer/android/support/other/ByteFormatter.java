@@ -54,7 +54,7 @@ public class ByteFormatter {
         return res.value + " " + res.units;
     }
 
-    public static BytesResult formatBytes(long sizeBytes, int flags) {
+    private static BytesResult formatBytes(long sizeBytes, int flags) {
         final int unit = ((flags & FLAG_IEC_UNITS) != 0) ? 1024 : 1000;
         final boolean isNegative = (sizeBytes < 0);
         float result = isNegative ? -sizeBytes : sizeBytes;

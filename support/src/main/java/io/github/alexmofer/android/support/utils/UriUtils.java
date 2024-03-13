@@ -108,7 +108,7 @@ public class UriUtils {
                                          @Nullable String defaultValue) {
         try (final Cursor cursor = context.getContentResolver().query(
                 self, new String[]{column}, null, null, null)) {
-            if (cursor.moveToFirst() && !cursor.isNull(0)) {
+            if (cursor != null && cursor.moveToFirst() && !cursor.isNull(0)) {
                 return cursor.getString(0);
             } else {
                 return defaultValue;
@@ -123,7 +123,7 @@ public class UriUtils {
                                      long defaultValue) {
         try (final Cursor cursor = context.getContentResolver().query(
                 self, new String[]{column}, null, null, null)) {
-            if (cursor.moveToFirst() && !cursor.isNull(0)) {
+            if (cursor != null && cursor.moveToFirst() && !cursor.isNull(0)) {
                 return cursor.getLong(0);
             } else {
                 return defaultValue;

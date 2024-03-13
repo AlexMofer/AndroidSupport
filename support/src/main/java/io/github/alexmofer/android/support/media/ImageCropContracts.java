@@ -5,11 +5,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.provider.MediaStore;
 
 import androidx.activity.result.contract.ActivityResultContract;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 
 /**
  * 图片裁剪Contracts
@@ -34,6 +36,7 @@ public class ImageCropContracts {
     /**
      * 裁剪
      */
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     public static class CropImage extends ActivityResultContract<Request, Integer> {
 
         @NonNull

@@ -19,6 +19,7 @@ import android.os.Build;
 import android.view.View;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.core.view.WindowInsetsCompat;
 
 /**
@@ -37,6 +38,7 @@ public class ViewUtils {
      * @param view View
      * @return 状态栏显示时返回true
      */
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     public static boolean isStatusBarsVisible(View view) {
         return (view.getWindowSystemUiVisibility() & View.SYSTEM_UI_FLAG_FULLSCREEN)
                 != View.SYSTEM_UI_FLAG_FULLSCREEN;
@@ -49,6 +51,7 @@ public class ViewUtils {
      * @param insets 窗口裁剪
      * @return 状态栏显示时返回true
      */
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     public static boolean isStatusBarsVisible(View view,
                                               @Nullable WindowInsetsCompat insets) {
         if (insets == null) {

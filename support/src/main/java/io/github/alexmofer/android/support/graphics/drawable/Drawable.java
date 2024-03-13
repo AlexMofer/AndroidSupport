@@ -30,12 +30,13 @@ public class Drawable extends android.graphics.drawable.Drawable {
 
     private ColorFilter mColorFilter;
     private int mAlpha = 255;
-    private int mOpacity = PixelFormat.TRANSLUCENT;
+    private int mOpacity;
 
     public Drawable() {
+        this(PixelFormat.TRANSLUCENT);
     }
 
-    public Drawable(int opacity) {
+    protected Drawable(int opacity) {
         mOpacity = opacity;
     }
 
@@ -44,7 +45,7 @@ public class Drawable extends android.graphics.drawable.Drawable {
         draw(canvas, mAlpha, mColorFilter);
     }
 
-    public void draw(@NonNull Canvas canvas, int alpha, @Nullable ColorFilter colorFilter) {
+    protected void draw(@NonNull Canvas canvas, int alpha, @Nullable ColorFilter colorFilter) {
     }
 
     @Override

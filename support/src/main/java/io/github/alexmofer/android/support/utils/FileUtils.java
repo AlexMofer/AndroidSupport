@@ -15,6 +15,7 @@
  */
 package io.github.alexmofer.android.support.utils;
 
+import android.os.Build;
 import android.text.TextUtils;
 
 import androidx.annotation.Nullable;
@@ -24,14 +25,13 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
 /**
  * 文件工具类
@@ -254,24 +254,6 @@ public class FileUtils {
      *
      * @param file    文件
      * @param content 字符串
-     * @return 是否成功
-     */
-    public static boolean writeString(File file, String content) {
-        if (content == null)
-            return file.delete();
-        try (final BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
-            writer.write(content);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
-    }
-
-    /**
-     * 写入字符串内容
-     *
-     * @param file    文件
-     * @param content 字符串
      * @param cs      字符集
      * @return 是否成功
      */
@@ -289,24 +271,18 @@ public class FileUtils {
     }
 
     /**
-     * 读取字符串内容
+     * 写入字符串内容
      *
-     * @param file 文件
-     * @return 字符串
+     * @param file    文件
+     * @param content 字符串
+     * @return 是否成功
      */
-    public static String readString(File file) {
-        if (file == null || !file.exists() || !file.isFile()) {
-            return null;
-        }
-        try (final BufferedReader reader = new BufferedReader(new FileReader(file))) {
-            final StringBuilder sb = new StringBuilder();
-            String line;
-            while ((line = reader.readLine()) != null) {
-                sb.append(line).append("\n");
-            }
-            return sb.toString();
-        } catch (Exception e) {
-            return null;
+    public static boolean writeString(File file, String content) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            return writeString(file, content, StandardCharsets.UTF_8);
+        } else {
+            //noinspection CharsetObjectCanBeUsed
+            return writeString(file, content, Charset.forName("UTF-8"));
         }
     }
 
@@ -335,6 +311,20 @@ public class FileUtils {
         }
     }
 
+    /**
+     * 读取字符串内容
+     *
+     * @param file 文件
+     * @return 字符串
+     */
+    public static String readString(File file) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            return readString(file, StandardCharsets.UTF_8);
+        } else {
+            //noinspection CharsetObjectCanBeUsed
+            return readString(file, Charset.forName("UTF-8"));
+        }
+    }
 
     /**
      * 复制文件夹

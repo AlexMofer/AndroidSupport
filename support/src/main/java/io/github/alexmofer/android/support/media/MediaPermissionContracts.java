@@ -28,7 +28,7 @@ public class MediaPermissionContracts {
      * @param callback 回调
      * @return 启动器
      */
-    @SuppressWarnings("unused")
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     public static MediaPermissionLauncher registerImagePermission(Fragment fragment,
                                                                   MediaPermissionCallback callback) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
@@ -52,6 +52,7 @@ public class MediaPermissionContracts {
      * @param callback 回调
      * @return 启动器
      */
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     public static MediaPermissionLauncher registerImagePermission(FragmentActivity activity,
                                                                   MediaPermissionCallback callback) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
@@ -117,6 +118,7 @@ public class MediaPermissionContracts {
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     private static class ReadPermissionLauncher implements MediaPermissionLauncher {
 
         private final ActivityResultLauncher<String> mLauncher;
