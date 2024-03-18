@@ -23,6 +23,8 @@ import android.view.ViewOutlineProvider;
 
 import androidx.annotation.RequiresApi;
 
+import io.github.alexmofer.android.support.utils.ViewOutlineProviderUtils;
+
 /**
  * 圆角矩形裁剪
  * Created by Alex on 2024/3/15.
@@ -70,11 +72,7 @@ public class RoundRectOutlineProvider extends ViewOutlineProvider {
                 new float[]{mTopLeftRadius, mTopLeftRadius,
                         mTopRightRadius, mTopRightRadius, mBottomRightRadius, mBottomRightRadius,
                         mBottomLeftRadius, mBottomLeftRadius}, Path.Direction.CW);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            outline.setPath(mPath);
-        } else {
-            outline.setConvexPath(mPath);
-        }
+        ViewOutlineProviderUtils.setPath(outline, mPath);
     }
 
     /**
